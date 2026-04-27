@@ -1,0 +1,83 @@
+:root {
+  --bg: #0b1020;
+  --panel: #131a33;
+  --panel-2: #1a2246;
+  --ink: #e8ecff;
+  --muted: #8a93bf;
+  --accent: #7bd3ff;
+  --aurora-1: #3ddc84; /* Green */
+  --aurora-2: #7bd3ff; /* Blue */
+  --aurora-3: #bc7fff; /* Purple */
+  --grid: rgba(255,255,255,0.06);
+}
+
+/* --- RESPONSIVE GRID SYSTEM --- */
+.dashboard-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(12, 1fr);
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Desktop/Tablet Spans */
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: span 4; }
+.span-5 { grid-column: span 5; }
+.span-8 { grid-column: span 8; }
+.span-12 { grid-column: span 12; }
+
+/* Mobile View (Stacking) */
+@media (max-width: 900px) {
+  .span-3, .span-4, .span-5, .span-8, .span-12 {
+    grid-column: span 12;
+  }
+  .solar-grid { grid-template-columns: 1fr !important; }
+}
+
+/* --- CREATIVE AURORA TITLE --- */
+.aurora-title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 5%;
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(
+    to right, 
+    var(--aurora-1), 
+    var(--aurora-2), 
+    var(--aurora-3), 
+    var(--aurora-1)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: aurora-flow 6s linear infinite;
+  margin: 0;
+}
+
+@keyframes aurora-flow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* --- SHARED STYLES --- */
+.card { background: var(--panel); border: 1px solid var(--grid); border-radius: 12px; padding: 16px; }
+.card h2 { margin: 0 0 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px; }
+
+.big { font-size: 42px; font-weight: 600; line-height: 1; }
+.tag { padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+.tag.ok { background: rgba(61,220,132,0.15); color: #3ddc84; }
+.tag.bad { background: rgba(255,93,122,0.15); color: #ff5d7a; }
+
+.solar-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+.intensity-ring { --pct: 0; width: 96px; height: 96px; border-radius: 50%;
+  background: conic-gradient(var(--aurora-2) calc(var(--pct) * 1%), rgba(255,255,255,0.08) 0);
+  display: flex; align-items: center; justify-content: center; position: relative; }
+.intensity-ring::before { content: ""; position: absolute; inset: 8px; border-radius: 50%; background: var(--panel); }
+
+.band { display: grid; grid-template-columns: 50px 1fr 40px; gap: 10px; align-items: center; margin-bottom: 6px; font-size: 12px; }
+.band .bar { height: 8px; background: var(--panel-2); border-radius: 4px; overflow: hidden; position: relative; }
+.band .fill { height: 100%; background: linear-gradient(90deg, var(--aurora-1), var(--aurora-2)); border-radius: 4px; }
